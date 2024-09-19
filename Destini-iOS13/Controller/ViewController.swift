@@ -8,6 +8,7 @@
 
 import UIKit
 
+var storyBrain = StoryBrain()
 
 class ViewController: UIViewController {
     
@@ -17,19 +18,19 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        updateUI(viewStory: currentStory)
+        updateUI()
     }
 
     @IBAction func choiceMade(_ sender: UIButton) {
         let userChoice = sender.currentTitle
-        let nextStory = nextStory(userChoice: userChoice!)
-        updateUI(viewStory: nextStory)
+        storyBrain.nextStory(userChoice: userChoice!)
+        updateUI()
     }
     
-    func updateUI(viewStory : Story) {
-        storyLabel.text = viewStory.title
-        choice1Button.setTitle(viewStory.choice1, for: .normal)
-        choice2Button.setTitle(viewStory.choice2, for: .normal)
+    func updateUI() {
+        storyLabel.text = storyBrain.getStory().title
+        choice1Button.setTitle(storyBrain.getStory().choice1, for: .normal)
+        choice2Button.setTitle(storyBrain.getStory().choice2, for: .normal)
     }
 
 }
